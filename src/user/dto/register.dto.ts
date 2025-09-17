@@ -1,4 +1,3 @@
-// src/auth/dto/register.dto.ts
 import { IsEmail, IsNotEmpty, IsString, MinLength, Matches, ValidateIf } from 'class-validator';
 
 export class RegisterDto {
@@ -21,7 +20,6 @@ export class RegisterDto {
 
   @IsString()
   @IsNotEmpty()
-  // Aqui está a correção: usamos uma função para garantir que as duas senhas são idênticas.
   @Matches(RegExp(/.*/), { 
     message: 'As senhas não coincidem.'
   })
