@@ -1,21 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param, Delete, UsePipes, ValidationPipe, Post } from '@nestjs/common';
 import { UserService } from './user.service';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Prisma } from '../../generated/prisma';
 
 @Controller('user')
 @UsePipes(new ValidationPipe())
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post() 
-  create(@Body() createUserDto: any) {
-    return this.userService.create(createUserDto);
+  @Post()
+  create(@Body() data: Prisma.UserCreateInput) {
+    return this.userService.create(data);
   }
- 
- 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(id, updateUserDto);
+
+  @Get()
+  findAll() {
+    return this.userService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.userService.findOne(id);
   }
 
   @Delete(':id')
