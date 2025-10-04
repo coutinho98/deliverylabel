@@ -5,6 +5,10 @@ export class CreateRestaurantDto {
   @IsNotEmpty()
   name: string;
 
+  @IsString()
+  @IsNotEmpty()
+  slug: string;
+
   @IsOptional()
   @IsUrl()
   logoUrl?: string;
